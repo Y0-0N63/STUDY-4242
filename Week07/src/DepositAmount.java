@@ -18,10 +18,9 @@ class BankAccount { //BankAccount 클래스를 만들기
     //다른 스레드에서 접근 불가능
     //->deposit 접근 방지, 데이터 일관성 유지
 
-        try {
-			//[문제2] 0.5초 단위로 출력
+        try { //[문제2] 0.5초 단위로 출력
             Thread.sleep(500);
-        }catch(InterruptedException e) {
+        } catch(InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -42,7 +41,7 @@ public class DepositAmount {
         BankAccount account = new BankAccount(1000); //BankAccount 클래스로부터 객체 생성
         Runnable run = new Runnable() { //Runnable 익명클래스를 만들어서
 
-            @Override                   //run메소드를 오버라이딩
+            @Override //run메소드를 오버라이딩
             public void run() {
                 for(int i = 0; i < 5; i++) {
                     account.deposit(100); //BankAccount 객체의 deposit 메소드를 호출하도록 한다.
@@ -51,7 +50,7 @@ public class DepositAmount {
         };
 
         // [문제4] Runnable 익명객체를 생성자의 매개값으로 받는
-        //Thread 객체 2개를 생성 후 start 메소드 호출하기
+        // Thread 객체 2개를 생성 후 start 메소드 호출하기
         Thread thread1=new Thread(run);
         Thread thread2=new Thread(run);
 
@@ -62,7 +61,7 @@ public class DepositAmount {
             thread1.join();
             thread2.join();
 
-        }catch(InterruptedException e) {
+        } catch(InterruptedException e) {
             e.printStackTrace();
         }
 
